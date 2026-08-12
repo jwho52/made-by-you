@@ -1,432 +1,192 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+import { useState } from "react";
+import "./App.css";
 
-* {
-	box-sizing: border-box;
+type Product = {
+	name: string;
+	icon: string;
+	price: string;
+	description: string;
+};
+
+const products: Product[] = [
+	{
+		name: "T-Shirts",
+		icon: "👕",
+		price: "From $24.99",
+		description: "Your design, printed on a premium everyday tee.",
+	},
+	{
+		name: "Hoodies",
+		icon: "🧥",
+		price: "From $44.99",
+		description: "Comfortable hoodies made for your custom designs.",
+	},
+	{
+		name: "Hats",
+		icon: "🧢",
+		price: "From $24.99",
+		description: "Put your design on a hat and make it yours.",
+	},
+];
+
+function App() {
+	const [prompt, setPrompt] = useState("");
+	const [started, setStarted] = useState(false);
+
+	const handleCreate = () => {
+		if (prompt.trim()) {
+			setStarted(true);
+		}
+	};
+
+	return (
+		<div className="site">
+			<header className="navbar">
+				<div className="brand">
+					<span className="brand-mark">M</span>
+					<span>MadeByYou</span>
+				</div>
+
+				<nav>
+					<a href="#create">Create</a>
+					<a href="#shop">Shop</a>
+					<a href="#how-it-works">How It Works</a>
+				</nav>
+
+				<button className="cart-button">Cart (0)</button>
+			</header>
+
+			<main>
+				<section className="hero" id="create">
+					<div className="hero-content">
+						<div className="eyebrow">YOUR IDEA. YOUR DESIGN. YOUR CLOTHING.</div>
+
+						<h1>
+							Make something
+							<span> MadeByYou.</span>
+						</h1>
+
+						<p className="hero-text">
+							Describe what you imagine and turn it into a custom design
+							you can actually wear.
+						</p>
+
+						<div className="creator-box">
+							<div className="creator-label">What do you want to create?</div>
+
+							<textarea
+								value={prompt}
+								onChange={(event) => setPrompt(event.target.value)}
+								placeholder="Example: A colorful sunset over the ocean with palm trees and a retro 80s style..."
+								rows={4}
+							/>
+
+							<div className="creator-bottom">
+								<span className="hint">✨ AI-powered design creation</span>
+
+								<button className="create-button" onClick={handleCreate}>
+									{started ? "DESIGN STARTED ✓" : "CREATE MY DESIGN →"}
+								</button>
+							</div>
+						</div>
+
+						{started && (
+							<div className="design-message">
+								<strong>Your idea:</strong> {prompt}
+								<br />
+								<span>
+									Our AI designer will turn this into your custom artwork.
+								</span>
+							</div>
+						)}
+					</div>
+				</section>
+
+				<section className="products-section" id="shop">
+					<div className="section-heading">
+						<div>
+							<div className="eyebrow">CHOOSE YOUR CANVAS</div>
+							<h2>Wear your design.</h2>
+						</div>
+
+						<p>
+							Create something unique and put it on clothing you'll
+							actually want to wear.
+						</p>
+					</div>
+
+					<div className="product-grid">
+						{products.map((product) => (
+							<div className="product-card" key={product.name}>
+								<div className="product-image">
+									<span>{product.icon}</span>
+								</div>
+
+								<div className="product-info">
+									<h3>{product.name}</h3>
+									<p>{product.description}</p>
+									<div className="product-footer">
+										<strong>{product.price}</strong>
+										<button>Customize →</button>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section className="how-section" id="how-it-works">
+					<div className="eyebrow">HOW IT WORKS</div>
+					<h2>From an idea to something you can wear.</h2>
+
+					<div className="steps">
+						<div className="step">
+							<span>01</span>
+							<h3>Describe</h3>
+							<p>Tell us exactly what you want your design to look like.</p>
+						</div>
+
+						<div className="step">
+							<span>02</span>
+							<h3>Create</h3>
+							<p>Our AI turns your idea into custom artwork.</p>
+						</div>
+
+						<div className="step">
+							<span>03</span>
+							<h3>Customize</h3>
+							<p>Adjust your design until it feels right.</p>
+						</div>
+
+						<div className="step">
+							<span>04</span>
+							<h3>Wear</h3>
+							<p>Order your clothing and have it delivered to you.</p>
+						</div>
+					</div>
+				</section>
+
+				<section className="final-cta">
+					<div className="eyebrow">MADE FOR YOU</div>
+					<h2>There are no limits to your imagination.</h2>
+					<p>Start with an idea. End with something that's yours.</p>
+
+					<a href="#create" className="final-button">
+						START CREATING →
+					</a>
+				</section>
+			</main>
+
+			<footer>
+				<div className="brand">
+					<span className="brand-mark">M</span>
+					<span>MadeByYou</span>
+				</div>
+
+				<p>© 2026 MadeByYou. Made for you.</p>
+			</footer>
+		</div>
+	);
 }
 
-html {
-	scroll-behavior: smooth;
-}
-
-body {
-	margin: 0;
-	font-family: "Inter", Arial, sans-serif;
-	background: #f7f7f5;
-	color: #111111;
-}
-
-button,
-textarea {
-	font-family: inherit;
-}
-
-button {
-	cursor: pointer;
-}
-
-.site {
-	min-height: 100vh;
-}
-
-.navbar {
-	height: 76px;
-	padding: 0 6%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background: rgba(247, 247, 245, 0.95);
-	border-bottom: 1px solid #deded9;
-	position: sticky;
-	top: 0;
-	z-index: 10;
-	backdrop-filter: blur(12px);
-}
-
-.brand {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	font-size: 21px;
-	font-weight: 800;
-	letter-spacing: -0.7px;
-}
-
-.brand-mark {
-	width: 32px;
-	height: 32px;
-	display: grid;
-	place-items: center;
-	background: #111;
-	color: white;
-	border-radius: 9px;
-	font-size: 15px;
-}
-
-nav {
-	display: flex;
-	gap: 32px;
-}
-
-nav a {
-	color: #555;
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: 600;
-}
-
-nav a:hover {
-	color: #111;
-}
-
-.cart-button {
-	background: #111;
-	color: white;
-	border: 0;
-	border-radius: 100px;
-	padding: 11px 18px;
-	font-weight: 600;
-}
-
-.hero {
-	padding: 100px 6% 110px;
-	background: #e9e9e4;
-}
-
-.hero-content {
-	max-width: 900px;
-	margin: auto;
-	text-align: center;
-}
-
-.eyebrow {
-	font-size: 11px;
-	font-weight: 800;
-	letter-spacing: 2px;
-	color: #666;
-	margin-bottom: 18px;
-}
-
-h1 {
-	font-size: clamp(52px, 8vw, 96px);
-	line-height: 0.95;
-	letter-spacing: -5px;
-	margin: 0;
-	font-weight: 800;
-}
-
-h1 span {
-	color: #777;
-}
-
-.hero-text {
-	max-width: 620px;
-	margin: 28px auto 40px;
-	font-size: 18px;
-	line-height: 1.6;
-	color: #555;
-}
-
-.creator-box {
-	background: white;
-	border: 1px solid #d7d7d1;
-	border-radius: 20px;
-	padding: 22px;
-	text-align: left;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-}
-
-.creator-label {
-	font-size: 13px;
-	font-weight: 700;
-	margin-bottom: 12px;
-}
-
-textarea {
-	width: 100%;
-	border: 0;
-	outline: 0;
-	resize: vertical;
-	font-size: 16px;
-	line-height: 1.5;
-	color: #111;
-	background: transparent;
-}
-
-textarea::placeholder {
-	color: #999;
-}
-
-.creator-bottom {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 15px;
-	margin-top: 15px;
-	padding-top: 15px;
-	border-top: 1px solid #eee;
-}
-
-.hint {
-	font-size: 12px;
-	color: #888;
-}
-
-.create-button,
-.final-button {
-	border: 0;
-	background: #111;
-	color: white;
-	padding: 15px 22px;
-	border-radius: 100px;
-	font-weight: 800;
-	font-size: 12px;
-	letter-spacing: 0.5px;
-}
-
-.create-button:hover,
-.final-button:hover {
-	background: #333;
-}
-
-.design-message {
-	margin-top: 15px;
-	background: #111;
-	color: white;
-	padding: 18px 20px;
-	border-radius: 14px;
-	font-size: 13px;
-	line-height: 1.7;
-	text-align: left;
-}
-
-.design-message span {
-	color: #aaa;
-}
-
-.products-section,
-.how-section {
-	padding: 100px 6%;
-	max-width: 1300px;
-	margin: auto;
-}
-
-.section-heading {
-	display: flex;
-	justify-content: space-between;
-	align-items: end;
-	gap: 40px;
-	margin-bottom: 45px;
-}
-
-h2 {
-	font-size: clamp(38px, 5vw, 58px);
-	letter-spacing: -3px;
-	margin: 0;
-	line-height: 1;
-}
-
-.section-heading p {
-	max-width: 380px;
-	color: #666;
-	line-height: 1.6;
-}
-
-.product-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-}
-
-.product-card {
-	background: white;
-	border: 1px solid #deded9;
-	border-radius: 18px;
-	overflow: hidden;
-}
-
-.product-image {
-	height: 330px;
-	background: #eeeeea;
-	display: grid;
-	place-items: center;
-}
-
-.product-image span {
-	font-size: 120px;
-	filter: grayscale(1);
-}
-
-.product-info {
-	padding: 22px;
-}
-
-.product-info h3 {
-	font-size: 22px;
-	margin: 0 0 8px;
-}
-
-.product-info p {
-	color: #777;
-	font-size: 14px;
-	line-height: 1.5;
-	min-height: 42px;
-}
-
-.product-footer {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-top: 20px;
-}
-
-.product-footer button {
-	background: transparent;
-	border: 0;
-	font-weight: 700;
-}
-
-.how-section {
-	background: #111;
-	color: white;
-	max-width: none;
-	padding-left: 10%;
-	padding-right: 10%;
-}
-
-.how-section .eyebrow {
-	color: #999;
-}
-
-.how-section h2 {
-	max-width: 700px;
-	margin-bottom: 60px;
-}
-
-.steps {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 35px;
-}
-
-.step {
-	border-top: 1px solid #444;
-	padding-top: 22px;
-}
-
-.step span {
-	color: #777;
-	font-weight: 700;
-	font-size: 13px;
-}
-
-.step h3 {
-	font-size: 21px;
-	margin: 30px 0 10px;
-}
-
-.step p {
-	color: #999;
-	font-size: 14px;
-	line-height: 1.6;
-}
-
-.final-cta {
-	text-align: center;
-	padding: 120px 6%;
-	background: #e9e9e4;
-}
-
-.final-cta h2 {
-	max-width: 800px;
-	margin: auto;
-}
-
-.final-cta p {
-	color: #666;
-	margin: 25px 0 35px;
-}
-
-footer {
-	padding: 35px 6%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background: #111;
-	color: white;
-}
-
-footer p {
-	color: #888;
-	font-size: 12px;
-}
-
-@media (max-width: 800px) {
-	.navbar {
-		padding: 0 20px;
-	}
-
-	nav {
-		display: none;
-	}
-
-	.hero {
-		padding: 75px 20px;
-	}
-
-	h1 {
-		letter-spacing: -3px;
-	}
-
-	.creator-bottom {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.create-button {
-		width: 100%;
-	}
-
-	.products-section,
-	.how-section {
-		padding: 70px 20px;
-	}
-
-	.section-heading {
-		display: block;
-	}
-
-	.section-heading p {
-		margin-top: 25px;
-	}
-
-	.product-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.product-image {
-		height: 280px;
-	}
-
-	.steps {
-		grid-template-columns: 1fr 1fr;
-	}
-
-	footer {
-		padding: 30px 20px;
-		gap: 20px;
-	}
-}
-
-@media (max-width: 500px) {
-	.steps {
-		grid-template-columns: 1fr;
-	}
-
-	footer {
-		display: block;
-	}
-
-	footer p {
-		margin-top: 20px;
-	}
-}
+export default App;
