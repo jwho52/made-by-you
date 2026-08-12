@@ -536,7 +536,8 @@ footer p {
 	footer p {
 		margin-top: 20px;
 	}
-	}
+}
+
 /* ================================
    MADEBYYOU DESIGNER
 ================================ */
@@ -673,11 +674,14 @@ footer p {
 	transform: translateY(-3px);
 }
 
+/* FIXED */
 .generated-art {
 	height: 230px;
+	overflow: hidden;
 	display: grid;
 	place-items: center;
 	margin-bottom: 15px;
+	background: #111;
 }
 
 .generated-art span {
@@ -771,15 +775,16 @@ footer p {
 	border: 2px solid rgba(255, 255, 255, 0.08);
 }
 
+/* FIXED */
 .clothing-design {
-	width: 85px;
-	height: 85px;
+	width: 110px;
+	height: 110px;
 	border: 2px solid rgba(255, 255, 255, 0.25);
+	overflow: hidden;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	color: #fff;
+	background: rgba(0, 0, 0, 0.3);
 }
 
 .clothing-design span {
@@ -965,4 +970,4 @@ footer p {
 		width: 100%;
 		margin-top: 20px;
 	}
-}
+		}
