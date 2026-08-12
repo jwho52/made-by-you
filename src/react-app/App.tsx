@@ -153,3 +153,143 @@ function App() {
             </div>
           </div>
         </section>
+{generated && designs.length > 0 && (
+          <section className="design-section">
+            <div className="eyebrow">YOUR CREATION</div>
+            <h2>CHOOSE YOUR DESIGN.</h2>
+            <p className="design-intro">
+              Choose the version you want on your {product.toLowerCase()}.
+            </p>
+
+            <div className="design-layout">
+              <div className="design-choices">
+                {designs.map((img, index) => (
+                  <button
+                    key={index}
+                    className={"design-card " + (selectedDesign === index ? "selected" : "")}
+                    onClick={() => setSelectedDesign(index)}
+                  >
+                    <div className="generated-art">
+                      <img src={img} alt={"Design " + (index + 1)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                    <strong>DESIGN {index + 1}</strong>
+                  </button>
+                ))}
+              </div>
+
+              <div className="clothing-preview">
+                <div
+                  className={"clothing " + (product === "Hoodie" ? "hoodie" : product === "Hat" ? "hat" : "shirt")}
+                  style={{ background: color.value }}
+                >
+                  <div className="clothing-design">
+                    {designs[selectedDesign] && (
+                      <img src={designs[selectedDesign]} alt="Selected" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    )}
+                  </div>
+                </div>
+                <div className="preview-info">
+                  <strong>{product}</strong>
+                  <span>{color.name}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="purchase-box">
+              <div>
+                <div className="creator-label">04 - SELECT SIZE</div>
+                <div className="size-options">
+                  {sizes.map((item) => (
+                    <button key={item} className={size === item ? "selected" : ""} onClick={() => setSize(item)}>
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="purchase-action">
+                <div>
+                  <span>{product}</span>
+                  <strong>${products[product].toFixed(2)}</strong>
+                </div>
+                <button className="create-button" onClick={addToCart}>
+                  ADD TO CART
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <section className="products-section" id="shop">
+          <div className="section-heading">
+            <div>
+              <div className="eyebrow">THE COLLECTION</div>
+              <h2>START<br />WITH A BLANK.</h2>
+            </div>
+            <p>Choose your piece. Create your design. Make it yours.</p>
+          </div>
+          <div className="product-grid">
+            {(Object.keys(products) as Product[]).map((item) => (
+              <button
+                key={item}
+                className="product-card"
+                onClick={() => {
+                  setProduct(item);
+                  document.getElementById("create")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                <div className="product-image">
+                  <span>{item === "T-Shirt" ? "T" : item === "Hoodie" ? "H" : "C"}</span>
+                </div>
+                <div className="product-info">
+                  <h3>{item}</h3>
+                  <p>Your blank canvas for whatever you want to create.</p>
+                  <div className="product-footer">
+                    <strong>${products[item].toFixed(2)}</strong>
+                    <span>CREATE</span>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="how-section" id="how">
+          <div className="eyebrow">HOW IT WORKS</div>
+          <h2>YOU IMAGINE IT.<br />WE MAKE IT REAL.</h2>
+          <div className="steps">
+            <div className="step">
+              <span>01</span>
+              <h3>CHOOSE</h3>
+              <p>Pick a shirt, hoodie, or hat to start your design.</p>
+            </div>
+            <div className="step">
+              <span>02</span>
+              <h3>CREATE</h3>
+              <p>Describe your idea and turn your imagination into artwork.</p>
+            </div>
+            <div className="step">
+              <span>03</span>
+              <h3>CUSTOMIZE</h3>
+              <p>Choose your colors, size, and favorite design.</p>
+            </div>
+            <div className="step">
+              <span>04</span>
+              <h3>WEAR IT</h3>
+              <p>Add it to your cart and have it printed and shipped.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div className="brand">
+          <div className="brand-mark">M</div>
+          MadeByYou
+        </div>
+        <p>YOUR IDEA. YOUR DESIGN. YOUR CLOTHING.</p>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
