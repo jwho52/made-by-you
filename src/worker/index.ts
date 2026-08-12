@@ -24,7 +24,7 @@ export default {
             num_steps: 4,
           });
 
-          const response = new Response(result as BodyInit);
+          const response = new Response(result as any);
           const arrayBuffer = await response.arrayBuffer();
           const bytes = new Uint8Array(arrayBuffer);
           let binary = "";
