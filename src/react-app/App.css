@@ -537,3 +537,432 @@ footer p {
 		margin-top: 20px;
 	}
 	}
+/* ================================
+   MADEBYYOU DESIGNER
+================================ */
+
+.product-options {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.product-option {
+	border: 1px solid #292929;
+	background: #0c0c0c;
+	color: #fff;
+	border-radius: 12px;
+	padding: 18px 12px;
+	text-align: left;
+	transition: 0.2s;
+}
+
+.product-option:hover,
+.product-option.selected {
+	border-color: #fff;
+	background: #181818;
+}
+
+.product-icon {
+	font-size: 30px;
+	margin-bottom: 12px;
+	filter: grayscale(1);
+}
+
+.product-option strong {
+	display: block;
+	font-size: 13px;
+	margin-bottom: 5px;
+}
+
+.product-option span {
+	color: #777;
+	font-size: 11px;
+}
+
+.color-label {
+	margin-top: 28px;
+}
+
+.color-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.color-option {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 12px;
+	border-radius: 100px;
+	border: 1px solid #292929;
+	background: #0c0c0c;
+	color: #999;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.color-option.selected {
+	border-color: #fff;
+	color: #fff;
+}
+
+.color-circle {
+	width: 17px;
+	height: 17px;
+	border-radius: 50%;
+	border: 1px solid #555;
+	display: block;
+}
+
+.prompt-label {
+	margin-top: 28px;
+}
+
+.design-section {
+	padding: 110px 5%;
+	background: #101010;
+	border-top: 1px solid #252525;
+	border-bottom: 1px solid #252525;
+}
+
+.design-section > * {
+	max-width: 1300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.design-section h2 {
+	margin-bottom: 18px;
+}
+
+.design-intro {
+	color: #777;
+	font-size: 14px;
+	margin-bottom: 50px;
+}
+
+.design-layout {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr;
+	gap: 25px;
+	align-items: start;
+}
+
+.design-choices {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14px;
+}
+
+.design-card {
+	border: 1px solid #292929;
+	background: #0a0a0a;
+	color: #fff;
+	padding: 0 0 18px;
+	border-radius: 12px;
+	overflow: hidden;
+	text-align: left;
+	transition: 0.2s;
+}
+
+.design-card:hover,
+.design-card.selected {
+	border-color: #fff;
+	transform: translateY(-3px);
+}
+
+.generated-art {
+	height: 230px;
+	display: grid;
+	place-items: center;
+	margin-bottom: 15px;
+}
+
+.generated-art span {
+	font-size: 55px;
+	font-weight: 900;
+	color: #fff;
+	letter-spacing: -4px;
+}
+
+.design-card strong {
+	font-size: 11px;
+	padding-left: 15px;
+	letter-spacing: 1px;
+}
+
+.clothing-preview {
+	background: #080808;
+	border: 1px solid #292929;
+	border-radius: 14px;
+	padding: 35px;
+	min-height: 510px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.clothing {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	filter: drop-shadow(0 30px 35px rgba(0, 0, 0, 0.5));
+}
+
+.clothing.shirt {
+	width: 250px;
+	height: 285px;
+	clip-path: polygon(
+		20% 8%,
+		38% 0,
+		50% 10%,
+		62% 0,
+		80% 8%,
+		100% 25%,
+		83% 42%,
+		72% 31%,
+		72% 100%,
+		28% 100%,
+		28% 31%,
+		17% 42%,
+		0 25%
+	);
+}
+
+.clothing.hoodie {
+	width: 260px;
+	height: 300px;
+	clip-path: polygon(
+		22% 12%,
+		35% 2%,
+		50% 18%,
+		65% 2%,
+		78% 12%,
+		94% 28%,
+		82% 42%,
+		73% 35%,
+		73% 100%,
+		27% 100%,
+		27% 35%,
+		18% 42%,
+		6% 28%
+	);
+}
+
+.clothing.hat {
+	width: 270px;
+	height: 145px;
+	border-radius: 50% 50% 15% 15%;
+	margin-top: 40px;
+}
+
+.clothing.hat::after {
+	content: "";
+	position: absolute;
+	width: 310px;
+	height: 40px;
+	bottom: -18px;
+	border-radius: 50%;
+	background: inherit;
+	border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.clothing-design {
+	width: 85px;
+	height: 85px;
+	border: 2px solid rgba(255, 255, 255, 0.25);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+}
+
+.clothing-design span {
+	font-size: 24px;
+	font-weight: 900;
+	letter-spacing: -2px;
+}
+
+.clothing-design small {
+	font-size: 7px;
+	letter-spacing: 1px;
+	margin-top: 5px;
+}
+
+.preview-info {
+	margin-top: 40px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.preview-info strong {
+	font-size: 16px;
+}
+
+.preview-info span {
+	color: #666;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.purchase-box {
+	max-width: 1300px;
+	margin: 30px auto 0;
+	padding: 28px;
+	background: #080808;
+	border: 1px solid #292929;
+	border-radius: 14px;
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 40px;
+}
+
+.size-options {
+	display: flex;
+	gap: 8px;
+}
+
+.size-options button {
+	width: 48px;
+	height: 42px;
+	border: 1px solid #292929;
+	background: #101010;
+	color: #888;
+	border-radius: 6px;
+	font-size: 11px;
+	font-weight: 800;
+}
+
+.size-options button:hover,
+.size-options button.selected {
+	background: #f5f5f5;
+	color: #080808;
+	border-color: #f5f5f5;
+}
+
+.purchase-action {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+}
+
+.purchase-action > div {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.purchase-action span {
+	color: #666;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+.purchase-action strong {
+	font-size: 20px;
+}
+
+.product-card {
+	border: 1px solid #242424;
+	color: #fff;
+	text-align: left;
+	padding: 0;
+	width: 100%;
+}
+
+.product-card:hover {
+	color: #fff;
+}
+
+@media (max-width: 800px) {
+	.product-options {
+		grid-template-columns: 1fr;
+	}
+
+	.product-option {
+		display: grid;
+		grid-template-columns: 45px 1fr auto;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.product-icon {
+		margin: 0;
+	}
+
+	.design-section {
+		padding: 80px 20px;
+	}
+
+	.design-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.design-choices {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.clothing-preview {
+		min-height: 450px;
+	}
+
+	.purchase-box {
+		display: block;
+	}
+
+	.purchase-action {
+		margin-top: 30px;
+		justify-content: space-between;
+	}
+
+	.purchase-action .create-button {
+		width: auto;
+	}
+}
+
+@media (max-width: 500px) {
+	.design-choices {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.generated-art {
+		height: 160px;
+	}
+
+	.clothing-preview {
+		padding: 20px;
+	}
+
+	.clothing.shirt {
+		width: 210px;
+		height: 240px;
+	}
+
+	.clothing.hoodie {
+		width: 220px;
+		height: 250px;
+	}
+
+	.clothing.hat {
+		width: 220px;
+		height: 120px;
+	}
+
+	.purchase-action {
+		display: block;
+	}
+
+	.purchase-action .create-button {
+		width: 100%;
+		margin-top: 20px;
+	}
+}
