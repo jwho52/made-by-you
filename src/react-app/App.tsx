@@ -1,66 +1,432 @@
-// src/App.tsx
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
-import "./App.css";
-
-function App() {
-	const [count, setCount] = useState(0);
-	const [name, setName] = useState("unknown");
-
-	return (
-		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-				<a href="https://hono.dev/" target="_blank">
-					<img src={honoLogo} className="logo cloudflare" alt="Hono logo" />
-				</a>
-				<a href="https://workers.cloudflare.com/" target="_blank">
-					<img
-						src={cloudflareLogo}
-						className="logo cloudflare"
-						alt="Cloudflare logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React + Hono + Cloudflare</h1>
-			<div className="card">
-				<button
-					onClick={() => setCount((count) => count + 1)}
-					aria-label="increment"
-				>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<div className="card">
-				<button
-					onClick={() => {
-						fetch("/api/")
-							.then((res) => res.json() as Promise<{ name: string }>)
-							.then((data) => setName(data.name));
-					}}
-					aria-label="get name"
-				>
-					Name from API is: {name}
-				</button>
-				<p>
-					Edit <code>worker/index.ts</code> to change the name
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the logos to learn more</p>
-		</>
-	);
+* {
+	box-sizing: border-box;
 }
 
-export default App;
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: "Inter", Arial, sans-serif;
+	background: #f7f7f5;
+	color: #111111;
+}
+
+button,
+textarea {
+	font-family: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+.site {
+	min-height: 100vh;
+}
+
+.navbar {
+	height: 76px;
+	padding: 0 6%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: rgba(247, 247, 245, 0.95);
+	border-bottom: 1px solid #deded9;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	backdrop-filter: blur(12px);
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 21px;
+	font-weight: 800;
+	letter-spacing: -0.7px;
+}
+
+.brand-mark {
+	width: 32px;
+	height: 32px;
+	display: grid;
+	place-items: center;
+	background: #111;
+	color: white;
+	border-radius: 9px;
+	font-size: 15px;
+}
+
+nav {
+	display: flex;
+	gap: 32px;
+}
+
+nav a {
+	color: #555;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+nav a:hover {
+	color: #111;
+}
+
+.cart-button {
+	background: #111;
+	color: white;
+	border: 0;
+	border-radius: 100px;
+	padding: 11px 18px;
+	font-weight: 600;
+}
+
+.hero {
+	padding: 100px 6% 110px;
+	background: #e9e9e4;
+}
+
+.hero-content {
+	max-width: 900px;
+	margin: auto;
+	text-align: center;
+}
+
+.eyebrow {
+	font-size: 11px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	color: #666;
+	margin-bottom: 18px;
+}
+
+h1 {
+	font-size: clamp(52px, 8vw, 96px);
+	line-height: 0.95;
+	letter-spacing: -5px;
+	margin: 0;
+	font-weight: 800;
+}
+
+h1 span {
+	color: #777;
+}
+
+.hero-text {
+	max-width: 620px;
+	margin: 28px auto 40px;
+	font-size: 18px;
+	line-height: 1.6;
+	color: #555;
+}
+
+.creator-box {
+	background: white;
+	border: 1px solid #d7d7d1;
+	border-radius: 20px;
+	padding: 22px;
+	text-align: left;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+.creator-label {
+	font-size: 13px;
+	font-weight: 700;
+	margin-bottom: 12px;
+}
+
+textarea {
+	width: 100%;
+	border: 0;
+	outline: 0;
+	resize: vertical;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #111;
+	background: transparent;
+}
+
+textarea::placeholder {
+	color: #999;
+}
+
+.creator-bottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 15px;
+	margin-top: 15px;
+	padding-top: 15px;
+	border-top: 1px solid #eee;
+}
+
+.hint {
+	font-size: 12px;
+	color: #888;
+}
+
+.create-button,
+.final-button {
+	border: 0;
+	background: #111;
+	color: white;
+	padding: 15px 22px;
+	border-radius: 100px;
+	font-weight: 800;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+}
+
+.create-button:hover,
+.final-button:hover {
+	background: #333;
+}
+
+.design-message {
+	margin-top: 15px;
+	background: #111;
+	color: white;
+	padding: 18px 20px;
+	border-radius: 14px;
+	font-size: 13px;
+	line-height: 1.7;
+	text-align: left;
+}
+
+.design-message span {
+	color: #aaa;
+}
+
+.products-section,
+.how-section {
+	padding: 100px 6%;
+	max-width: 1300px;
+	margin: auto;
+}
+
+.section-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+	gap: 40px;
+	margin-bottom: 45px;
+}
+
+h2 {
+	font-size: clamp(38px, 5vw, 58px);
+	letter-spacing: -3px;
+	margin: 0;
+	line-height: 1;
+}
+
+.section-heading p {
+	max-width: 380px;
+	color: #666;
+	line-height: 1.6;
+}
+
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.product-card {
+	background: white;
+	border: 1px solid #deded9;
+	border-radius: 18px;
+	overflow: hidden;
+}
+
+.product-image {
+	height: 330px;
+	background: #eeeeea;
+	display: grid;
+	place-items: center;
+}
+
+.product-image span {
+	font-size: 120px;
+	filter: grayscale(1);
+}
+
+.product-info {
+	padding: 22px;
+}
+
+.product-info h3 {
+	font-size: 22px;
+	margin: 0 0 8px;
+}
+
+.product-info p {
+	color: #777;
+	font-size: 14px;
+	line-height: 1.5;
+	min-height: 42px;
+}
+
+.product-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.product-footer button {
+	background: transparent;
+	border: 0;
+	font-weight: 700;
+}
+
+.how-section {
+	background: #111;
+	color: white;
+	max-width: none;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.how-section .eyebrow {
+	color: #999;
+}
+
+.how-section h2 {
+	max-width: 700px;
+	margin-bottom: 60px;
+}
+
+.steps {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 35px;
+}
+
+.step {
+	border-top: 1px solid #444;
+	padding-top: 22px;
+}
+
+.step span {
+	color: #777;
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.step h3 {
+	font-size: 21px;
+	margin: 30px 0 10px;
+}
+
+.step p {
+	color: #999;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.final-cta {
+	text-align: center;
+	padding: 120px 6%;
+	background: #e9e9e4;
+}
+
+.final-cta h2 {
+	max-width: 800px;
+	margin: auto;
+}
+
+.final-cta p {
+	color: #666;
+	margin: 25px 0 35px;
+}
+
+footer {
+	padding: 35px 6%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #111;
+	color: white;
+}
+
+footer p {
+	color: #888;
+	font-size: 12px;
+}
+
+@media (max-width: 800px) {
+	.navbar {
+		padding: 0 20px;
+	}
+
+	nav {
+		display: none;
+	}
+
+	.hero {
+		padding: 75px 20px;
+	}
+
+	h1 {
+		letter-spacing: -3px;
+	}
+
+	.creator-bottom {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.create-button {
+		width: 100%;
+	}
+
+	.products-section,
+	.how-section {
+		padding: 70px 20px;
+	}
+
+	.section-heading {
+		display: block;
+	}
+
+	.section-heading p {
+		margin-top: 25px;
+	}
+
+	.product-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.product-image {
+		height: 280px;
+	}
+
+	.steps {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	footer {
+		padding: 30px 20px;
+		gap: 20px;
+	}
+}
+
+@media (max-width: 500px) {
+	.steps {
+		grid-template-columns: 1fr;
+	}
+
+	footer {
+		display: block;
+	}
+
+	footer p {
+		margin-top: 20px;
+	}
+}
