@@ -24,6 +24,11 @@ button {
 	cursor: pointer;
 }
 
+button:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 3px;
+}
+
 .site {
 	min-height: 100vh;
 	background: #080808;
@@ -54,6 +59,7 @@ button {
 	font-size: 21px;
 	font-weight: 900;
 	letter-spacing: -0.8px;
+	white-space: nowrap;
 }
 
 .brand-mark {
@@ -66,6 +72,7 @@ button {
 	border-radius: 8px;
 	font-size: 16px;
 	font-weight: 900;
+	flex-shrink: 0;
 }
 
 nav {
@@ -78,7 +85,7 @@ nav a {
 	text-decoration: none;
 	font-size: 13px;
 	font-weight: 600;
-	transition: color 0.2s;
+	transition: color 0.2s ease;
 }
 
 nav a:hover {
@@ -92,6 +99,12 @@ nav a:hover {
 	border-radius: 100px;
 	padding: 12px 20px;
 	font-weight: 800;
+	transition: 0.2s ease;
+}
+
+.cart-button:hover {
+	background: #fff;
+	transform: translateY(-1px);
 }
 
 /* =========================================
@@ -184,7 +197,7 @@ h1 span {
 	border-radius: 12px;
 	padding: 18px 12px;
 	text-align: left;
-	transition: 0.2s;
+	transition: 0.2s ease;
 }
 
 .product-option:hover,
@@ -231,11 +244,18 @@ h1 span {
 	color: #999;
 	font-size: 11px;
 	font-weight: 700;
+	transition: 0.2s ease;
+}
+
+.color-option:hover {
+	border-color: #666;
+	color: #fff;
 }
 
 .color-option.selected {
 	border-color: #fff;
 	color: #fff;
+	background: #151515;
 }
 
 .color-circle {
@@ -244,6 +264,7 @@ h1 span {
 	border-radius: 50%;
 	border: 1px solid #555;
 	display: block;
+	flex-shrink: 0;
 }
 
 .prompt-label {
@@ -264,6 +285,10 @@ textarea {
 
 textarea::placeholder {
 	color: #666;
+}
+
+textarea:disabled {
+	opacity: 0.5;
 }
 
 .creator-bottom {
@@ -290,7 +315,8 @@ textarea::placeholder {
 	font-weight: 900;
 	font-size: 11px;
 	letter-spacing: 1px;
-	transition: all 0.2s;
+	transition: all 0.2s ease;
+	white-space: nowrap;
 }
 
 .create-button:hover {
@@ -362,7 +388,7 @@ textarea::placeholder {
 	border-radius: 12px;
 	overflow: hidden;
 	text-align: left;
-	transition: 0.2s;
+	transition: 0.2s ease;
 }
 
 .design-card:hover,
@@ -497,7 +523,7 @@ textarea::placeholder {
 }
 
 /* =========================================
-   GARMENT COLOR
+   COLORED GARMENT
 ========================================= */
 
 .garment-color {
@@ -523,14 +549,21 @@ textarea::placeholder {
 	mask-size: contain;
 
 	z-index: 1;
+
+	/*
+	 * Makes the color layer respond correctly
+	 * to the transparent garment PNG.
+	 */
 }
 
 /* =========================================
-   GARMENT SHADING
+   GARMENT IMAGE / SHADOWS
 ========================================= */
 
 .mockup-garment {
 	position: absolute;
+
+	inset: 0;
 
 	width: 100%;
 	height: 100%;
@@ -541,20 +574,27 @@ textarea::placeholder {
 
 	z-index: 2;
 
+	/*
+	 * IMPORTANT:
+	 * The old mockup PNG is no longer allowed
+	 * to cover the selected garment color.
+	 *
+	 * This layer provides the folds/shadows.
+	 */
 	mix-blend-mode: multiply;
 
-	opacity: 0.62;
+	opacity: 0.34;
 
 	filter:
 		grayscale(1)
-		contrast(1.18)
-		brightness(1.05);
+		contrast(1.35)
+		brightness(1.08);
 
 	pointer-events: none;
 }
 
 /* =========================================
-   GARMENT LIGHT
+   GARMENT HIGHLIGHT
 ========================================= */
 
 .real-product::after {
@@ -571,7 +611,7 @@ textarea::placeholder {
 	background:
 		radial-gradient(
 			ellipse at 48% 32%,
-			rgba(255, 255, 255, 0.13),
+			rgba(255, 255, 255, 0.18),
 			transparent 55%
 		);
 
@@ -591,7 +631,7 @@ textarea::placeholder {
 }
 
 /* =========================================
-   PRINT
+   PRINT AREA
 ========================================= */
 
 .mockup-print {
@@ -615,13 +655,16 @@ textarea::placeholder {
 
 	pointer-events: none;
 
-	mix-blend-mode: multiply;
+	/*
+	 * The design sits above the garment.
+	 */
+	mix-blend-mode: normal;
 
-	opacity: 0.94;
+	opacity: 0.96;
 
 	filter:
 		contrast(1.08)
-		saturate(0.9);
+		saturate(1);
 }
 
 .mockup-print img {
@@ -634,11 +677,11 @@ textarea::placeholder {
 
 	mix-blend-mode: multiply;
 
-	opacity: 0.92;
+	opacity: 0.95;
 
 	filter:
-		contrast(1.1)
-		saturate(0.9);
+		contrast(1.12)
+		saturate(1.05);
 }
 
 /* =========================================
@@ -670,11 +713,11 @@ textarea::placeholder {
 
 	mix-blend-mode: multiply;
 
-	opacity: 0.75;
+	opacity: 0.55;
 }
 
 /* =========================================
-   SHIRT
+   T-SHIRT
 ========================================= */
 
 .real-product.tshirt {
@@ -685,7 +728,6 @@ textarea::placeholder {
 .real-product.tshirt .print-texture {
 	width: 105px;
 	height: 105px;
-
 	top: 45%;
 }
 
@@ -701,7 +743,6 @@ textarea::placeholder {
 .real-product.hoodie .print-texture {
 	width: 120px;
 	height: 120px;
-
 	top: 47%;
 }
 
@@ -717,7 +758,6 @@ textarea::placeholder {
 .real-product.hat .print-texture {
 	width: 65px;
 	height: 65px;
-
 	top: 43%;
 }
 
@@ -774,7 +814,7 @@ textarea::placeholder {
 
 	display: flex;
 
-	align-items: end;
+	align-items: flex-end;
 
 	justify-content: space-between;
 
@@ -784,6 +824,7 @@ textarea::placeholder {
 .size-options {
 	display: flex;
 	gap: 8px;
+	flex-wrap: wrap;
 }
 
 .size-options button {
@@ -801,6 +842,8 @@ textarea::placeholder {
 	font-size: 11px;
 
 	font-weight: 800;
+
+	transition: 0.2s ease;
 }
 
 .size-options button:hover,
@@ -856,7 +899,7 @@ textarea::placeholder {
 
 	justify-content: space-between;
 
-	align-items: end;
+	align-items: flex-end;
 
 	gap: 40px;
 
@@ -913,8 +956,8 @@ h2 {
 	width: 100%;
 
 	transition:
-		transform 0.25s,
-		border-color 0.25s;
+		transform 0.25s ease,
+		border-color 0.25s ease;
 }
 
 .product-card:hover {
@@ -956,6 +999,12 @@ h2 {
 		contrast(1.05);
 
 	opacity: 0.9;
+
+	transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+	transform: scale(1.04);
 }
 
 .product-info {
@@ -1087,12 +1136,37 @@ footer p {
 }
 
 /* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+	.design-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.clothing-preview {
+		width: 100%;
+	}
+
+	.product-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.steps {
+		grid-template-columns: 1fr 1fr;
+	}
+
+}
+
+/* =========================================
    MOBILE
 ========================================= */
 
 @media (max-width: 800px) {
 
 	.navbar {
+		height: 70px;
 		padding: 0 20px;
 	}
 
@@ -1104,9 +1178,9 @@ footer p {
 		min-height: auto;
 
 		padding:
-			85px
+			75px
 			20px
-			90px;
+			80px;
 	}
 
 	h1 {
@@ -1182,6 +1256,10 @@ footer p {
 		height: 380px;
 	}
 
+	.real-product.tshirt {
+		height: 380px;
+	}
+
 	.real-product.hoodie {
 		height: 400px;
 	}
@@ -1238,6 +1316,7 @@ footer p {
 
 		gap: 20px;
 	}
+
 }
 
 /* =========================================
@@ -1287,31 +1366,19 @@ footer p {
 		height: 290px;
 	}
 
-	.real-product.tshirt .mockup-print {
-		width: 90px;
-		height: 90px;
-	}
-
-	.real-product.hoodie .mockup-print {
-		width: 105px;
-		height: 105px;
-	}
-
-	.real-product.hat .mockup-print {
-		width: 58px;
-		height: 58px;
-	}
-
+	.real-product.tshirt .mockup-print,
 	.real-product.tshirt .print-texture {
 		width: 90px;
 		height: 90px;
 	}
 
+	.real-product.hoodie .mockup-print,
 	.real-product.hoodie .print-texture {
 		width: 105px;
 		height: 105px;
 	}
 
+	.real-product.hat .mockup-print,
 	.real-product.hat .print-texture {
 		width: 58px;
 		height: 58px;
@@ -1342,4 +1409,5 @@ footer p {
 	footer p {
 		margin-top: 20px;
 	}
+
 	}
