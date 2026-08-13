@@ -1460,3 +1460,436 @@ footer p {
 	}
 
 	}
+/* =========================================
+   REALISTIC PRODUCT MOCKUPS
+========================================= */
+
+.clothing-preview {
+	position: relative;
+	background:
+		radial-gradient(
+			circle at 50% 35%,
+			#202020 0%,
+			#101010 55%,
+			#080808 100%
+		);
+	border: 1px solid #292929;
+	border-radius: 16px;
+	min-height: 560px;
+	padding: 55px 30px 35px;
+	overflow: hidden;
+}
+
+/* soft studio lighting */
+
+.clothing-preview::before {
+	content: "";
+	position: absolute;
+	width: 420px;
+	height: 420px;
+	left: 50%;
+	top: 45%;
+	transform: translate(-50%, -50%);
+
+	background: radial-gradient(
+		circle,
+		rgba(255,255,255,.08),
+		transparent 65%
+	);
+
+	pointer-events: none;
+}
+
+/* PRODUCT */
+
+.clothing {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin: auto;
+
+	box-shadow:
+		0 35px 45px rgba(0,0,0,.65),
+		0 8px 15px rgba(0,0,0,.45);
+
+	filter:
+		contrast(1.02)
+		saturate(.92);
+
+	overflow: hidden;
+}
+
+/* realistic fabric */
+
+.clothing::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+
+	background:
+		repeating-linear-gradient(
+			0deg,
+			rgba(255,255,255,.025) 0px,
+			rgba(255,255,255,.025) 1px,
+			transparent 1px,
+			transparent 3px
+		),
+		repeating-linear-gradient(
+			90deg,
+			rgba(0,0,0,.025) 0px,
+			rgba(0,0,0,.025) 1px,
+			transparent 1px,
+			transparent 4px
+		);
+
+	mix-blend-mode: overlay;
+
+	pointer-events: none;
+
+	z-index: 10;
+}
+
+/* studio highlight */
+
+.clothing::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+
+	background:
+		linear-gradient(
+			110deg,
+			transparent 20%,
+			rgba(255,255,255,.08) 43%,
+			transparent 63%
+		);
+
+	opacity: .7;
+
+	pointer-events: none;
+
+	z-index: 11;
+}
+
+/* =========================================
+   T-SHIRT
+========================================= */
+
+.clothing.shirt {
+	width: 285px;
+	height: 330px;
+
+	clip-path: polygon(
+		21% 9%,
+		37% 1%,
+		50% 11%,
+		63% 1%,
+		79% 9%,
+
+		100% 27%,
+		84% 45%,
+
+		72% 35%,
+		72% 100%,
+
+		28% 100%,
+		28% 35%,
+
+		16% 45%,
+		0% 27%
+	);
+}
+
+/* shirt collar */
+
+.clothing.shirt .clothing-design::before {
+	content: "";
+	position: absolute;
+
+	width: 55px;
+	height: 27px;
+
+	top: -14px;
+
+	border-radius: 50%;
+
+	border:
+		3px solid rgba(0,0,0,.28);
+
+	background: transparent;
+}
+
+/* sleeve shadows */
+
+.clothing.shirt {
+	background-image:
+		linear-gradient(
+			90deg,
+			rgba(0,0,0,.18),
+			transparent 20%,
+			transparent 80%,
+			rgba(0,0,0,.18)
+		);
+}
+
+/* =========================================
+   HOODIE
+========================================= */
+
+.clothing.hoodie {
+	width: 300px;
+	height: 335px;
+
+	clip-path: polygon(
+		22% 13%,
+		34% 4%,
+		50% 18%,
+		66% 4%,
+		78% 13%,
+
+		96% 30%,
+		82% 47%,
+
+		73% 38%,
+		73% 100%,
+
+		27% 100%,
+		27% 38%,
+
+		18% 47%,
+		4% 30%
+	);
+}
+
+/* hoodie hood */
+
+.clothing.hoodie::marker {
+	display: none;
+}
+
+/* hoodie drawstring illusion */
+
+.clothing.hoodie .clothing-design::before,
+.clothing.hoodie .clothing-design::after {
+	content: "";
+
+	position: absolute;
+
+	width: 2px;
+	height: 50px;
+
+	background: rgba(255,255,255,.25);
+
+	top: -45px;
+}
+
+.clothing.hoodie .clothing-design::before {
+	left: 42%;
+	transform: rotate(-5deg);
+}
+
+.clothing.hoodie .clothing-design::after {
+	right: 42%;
+	transform: rotate(5deg);
+}
+
+/* =========================================
+   HAT
+========================================= */
+
+.clothing.hat {
+	width: 285px;
+	height: 155px;
+
+	border-radius:
+		52%
+		52%
+		18%
+		18%;
+
+	margin-top: 35px;
+
+	background-image:
+		linear-gradient(
+			105deg,
+			rgba(255,255,255,.08),
+			transparent 40%,
+			rgba(0,0,0,.22)
+		);
+}
+
+/* hat bill */
+
+.clothing.hat::after {
+	content: "";
+
+	position: absolute;
+
+	width: 330px;
+	height: 48px;
+
+	left: 50%;
+	bottom: -20px;
+
+	transform: translateX(-50%);
+
+	border-radius: 50%;
+
+	background: inherit;
+
+	box-shadow:
+		0 8px 12px rgba(0,0,0,.4),
+		inset 0 3px 5px rgba(255,255,255,.06);
+
+	z-index: 3;
+}
+
+/* =========================================
+   PRINT AREA
+========================================= */
+
+.clothing-design {
+	position: relative;
+
+	width: 125px;
+	height: 125px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	z-index: 5;
+
+	background: transparent;
+
+	overflow: hidden;
+
+	/* makes artwork feel printed */
+	mix-blend-mode: multiply;
+
+	opacity: .93;
+
+	filter:
+		contrast(.96)
+		saturate(.88);
+
+	transform:
+		perspective(300px)
+		rotateX(1deg)
+		rotateY(-1deg);
+}
+
+.clothing-design img {
+	width: 100%;
+	height: 100%;
+
+	object-fit: contain;
+
+	display: block;
+
+	mix-blend-mode: multiply;
+
+	filter:
+		contrast(.95)
+		saturate(.88);
+
+	opacity: .94;
+
+	/* tiny softness makes it less digital */
+	transform: scale(.98);
+}
+
+/* print texture */
+
+.clothing-design::after {
+	content: "";
+
+	position: absolute;
+	inset: 0;
+
+	background:
+		repeating-linear-gradient(
+			0deg,
+			transparent 0px,
+			transparent 2px,
+			rgba(0,0,0,.035) 3px
+		);
+
+	mix-blend-mode: multiply;
+
+	pointer-events: none;
+}
+
+/* =========================================
+   PRODUCT INFORMATION
+========================================= */
+
+.preview-info {
+	position: relative;
+
+	margin-top: 38px;
+
+	text-align: center;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: 7px;
+
+	z-index: 20;
+}
+
+.preview-info strong {
+	font-size: 17px;
+
+	letter-spacing: -.3px;
+}
+
+.preview-info span {
+	color: #666;
+
+	font-size: 10px;
+
+	text-transform: uppercase;
+
+	letter-spacing: 1.5px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+	.clothing-preview {
+		min-height: 500px;
+
+		padding:
+			50px
+			15px
+			30px;
+	}
+
+	.clothing.shirt {
+		width: 225px;
+		height: 260px;
+	}
+
+	.clothing.hoodie {
+		width: 235px;
+		height: 270px;
+	}
+
+	.clothing.hat {
+		width: 225px;
+		height: 125px;
+	}
+
+	.clothing-design {
+		width: 95px;
+		height: 95px;
+	}
+
+	}
