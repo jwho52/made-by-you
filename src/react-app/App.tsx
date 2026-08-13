@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import shirtMockup from "./assets/shirt_transparent.png";
 import hoodieMockup from "./assets/hoodie_transparent.png";
 import hatMockup from "./assets/hat_transparent.png";
@@ -65,6 +65,10 @@ function App() {
 
       const data = await res.json();
 
+      if (!Array.isArray(data.designs) || data.designs.length === 0) {
+        throw new Error("No designs were returned.");
+      }
+
       setDesigns(data.designs);
       setSelectedDesign(0);
       setGenerated(true);
@@ -94,6 +98,11 @@ function App() {
 
     return shirtMockup;
   };
+
+  const productClass = product
+    .toLowerCase()
+    .replace("-", "")
+    .replace(" ", "");
 
   return (
     <div className="site">
@@ -278,7 +287,7 @@ function App() {
                 ))}
               </div>
 
-              {/* REAL PRODUCT MOCKUP */}
+              {/* PRODUCT PREVIEW */}
 
               <div className="clothing-preview">
                 <div className="mockup-label">
@@ -286,18 +295,19 @@ function App() {
                 </div>
 
                 <div
-                  className={
-                    "real-product " +
-                    product.toLowerCase().replace("-", "")
-                  }
+                  className={`real-product ${productClass}`}
                   style={
                     {
-                      "--product-color":
-                        color.value,
-                    } as React.CSSProperties
+                      "--product-color": color.value,
+                      "--garment-image": `url("${getMockup()}")`,
+                    } as CSSProperties
                   }
                 >
-                  {/* REAL GARMENT */}
+                  {/* COLOR BASE */}
+
+                  <div className="garment-color" />
+
+                  {/* GARMENT SHADING */}
 
                   <img
                     className="mockup-garment"
@@ -305,7 +315,7 @@ function App() {
                     alt={`${product} mockup`}
                   />
 
-                  {/* PRINTED DESIGN */}
+                  {/* DESIGN */}
 
                   {designs[selectedDesign] && (
                     <div className="mockup-print">
@@ -316,7 +326,7 @@ function App() {
                     </div>
                   )}
 
-                  {/* PRINT TEXTURE */}
+                  {/* FABRIC TEXTURE */}
 
                   <div className="print-texture" />
                 </div>
@@ -418,13 +428,16 @@ function App() {
                   }}
                 >
                   <div className="product-image">
-                    <span>
-                      {item === "T-Shirt"
-                        ? "T"
-                        : item === "Hoodie"
-                        ? "H"
-                        : "C"}
-                    </span>
+                    <img
+                      src={
+                        item === "T-Shirt"
+                          ? shirtMockup
+                          : item === "Hoodie"
+                          ? hoodieMockup
+                          : hatMockup
+                      }
+                      alt={item}
+                    />
                   </div>
 
                   <div className="product-info">
